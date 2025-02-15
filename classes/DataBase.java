@@ -11,7 +11,9 @@ public class DataBase {
     private ArrayList<Curso> cursos;
     private ArrayList<Turma> turmas;
 
-    public DataBase() {
+    private static DataBase instance;
+
+        private DataBase() {
         this.alunos = new ArrayList<>();
         this.professores = new ArrayList<>();
         this.cursos = new ArrayList<>();
@@ -46,6 +48,17 @@ public class DataBase {
     
     }
 
+    public static DataBase getInstance(){
+
+        if (instance == null){
+            instance = new DataBase();
+        }   
+        return instance;
+
+        }
+    
+    
+
     public ArrayList<Aluno> getAlunos() {
         return alunos;
     }
@@ -77,4 +90,6 @@ public class DataBase {
     public void setTurmas(ArrayList<Turma> turmas) {
         this.turmas = turmas;
     }
+    
+
 }
