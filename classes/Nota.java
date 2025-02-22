@@ -1,10 +1,11 @@
 package classes;
 
-public class Nota {
+public class Nota implements iObserver {
 private Double nota1;
 private Double nota2;
 private Double nota3;
 private Double notaRecuperacao;
+private Boolean bloqueado;
   
   public Nota(){
    this.nota1 = 0.0;
@@ -15,9 +16,11 @@ private Double notaRecuperacao;
 
 
   public Nota(Double nota1, Double nota2, Double nota3) {
+    if (!bloqueado){
     this.nota1 = (nota1 != null) ? nota1 : 0.0;
     this.nota2 = (nota2 != null) ? nota2 : 0.0;
     this.nota3 = (nota3 != null) ? nota3 : 0.0; 
+  }
 }
 
 
@@ -26,7 +29,9 @@ public Double getNota1() {
 }
 
 public void setNota1(Double nota1) {
+  if (!bloqueado){
   this.nota1 = nota1;
+  }
 }
 
 
@@ -36,7 +41,9 @@ public Double getNota2() {
 }
 
 public void setNota2(Double nota2) {
+  if (!bloqueado){
   this.nota2 = nota2;
+  }
 }
 
 
@@ -45,7 +52,9 @@ public Double getNota3() {
 }
 
 public void setNota3(Double nota3) {
+  if (!bloqueado){
   this.nota3 = nota3;
+  }
 }
 
 
@@ -71,11 +80,16 @@ public boolean verificarSituacao() {
 }
 
 public void setNotaRecuperacao(double nota){
+  if (!bloqueado){
   this.notaRecuperacao = nota;
+  }
 }
 @Override
 public String toString(){
   return this.nota1 + " , " + this.nota2 + " " + this.nota3;
 }
 
+public  void update(Boolean param){
+  bloqueado = !param;
+}
 }

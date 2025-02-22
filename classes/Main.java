@@ -40,15 +40,30 @@ public class Main {
     
         System.out.print("Escolha o professor: ");
         int escolhaProfessor = entrada.nextInt();
-    
+        
         if (escolhaProfessor < 0 || escolhaProfessor > db.getProfessores().size()-1) {
-            System.out.println("Escolha inválida.");
-            return;
+          System.out.println("Escolha inválida.");
+          return;
+      }
+        System.out.print("Digite sua senha: ");
+        String escolhaSenha = entrada.nextLine();
+
+        if (escolhaSenha.equals(db.getProfessores().get(escolhaProfessor).getSenha())){
+              menuProfessor();
         }
-        menuProfessor();
           break;
         case 2:
-        menuCoordenador();
+        //System.out.print("De qual curso você é coordenador: ");
+        //mostrar lista de cursos
+        //escolher o curso
+        //pegar coordenador do curso esolhido e comparar com senhaescolhidacoord
+        //String escolhaSenhaCoord = entrada.nextLine();
+        //System.out.print("Digite sua senha: ");
+       //String escolhaSenhaCoord = entrada.nextLine();
+
+       // if (escolhaSenhaCoord.equals(db.getCursos().getgetSenha())){
+        //  menuCoordenador();
+        //}
           break;
         case 0:
             System.out.println("Saindo...");
@@ -479,7 +494,9 @@ public static void cadastrarTurma(){
   turma.setIdentificacao(entrada.nextLine());
 
   System.out.print("Informe o semestre: ");
-  turma.setSemestre(entrada.nextLine());
+  String nomeSemestre = entrada.nextLine(); 
+  Semestre semestre = new Semestre(nomeSemestre, true); 
+  turma.setSemestre(semestre); 
 
   System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
   for (int i = 0; i < db.getCursos().size(); i++) {
