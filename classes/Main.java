@@ -24,7 +24,9 @@ public class Main {
       System.out.println("║                MENU                     ║");
       System.out.println("╠═════════════════════════════════════════╣");
       System.out.println("║  1 - Para Professor                     ║");
-      System.out.println("║  2 - Para Cordenador                    ║");                
+      System.out.println("║  2 - Para Cordenador                    ║");   
+      System.out.println("║  3 - Para Exportar dados dos estudantes ║");  
+      System.out.println("║  4 - Para Exportar dados para o MEC     ║");               
       System.out.println("║  0 - Sair                               ║");
       System.out.println("╚═════════════════════════════════════════╝");
       System.out.print("Opção: ");
@@ -65,6 +67,13 @@ public class Main {
         //  menuCoordenador();
         //}
           break;
+
+        case 3: 
+        exportarDadosEstudante();
+        break;
+        case 4: 
+        importDadosEstudanteMEC();
+        break;
         case 0:
             System.out.println("Saindo...");
             break;
@@ -72,7 +81,7 @@ public class Main {
             System.out.println("Opção inválida!");
         }
       } while (opcao != 0);
-    menuCoordenador();
+ 
 
     //menuProfessor();
    
@@ -522,7 +531,7 @@ public static String exportarDadosEstudante(){
   ExportData exp = new ExportData();
   ArrayList<Aluno> alunos = db.getAlunos();
   for(int i = 0; i < alunos.size(); i++){
-    String[] sm = {"matricula", "alunos.get(i).getMatricula()"};
+    String[] sm = {"matricula", alunos.get(i).getMatricula()};
     String[] sn = {"nome", alunos.get(i).getNome()};
     String[] sc ={"cpf", alunos.get(i).getCpf()};
     String[] st = {"telefone", alunos.get(i).getTelefone()};
@@ -538,13 +547,13 @@ public static String exportarDadosEstudante(){
   return exp.ArrayToXMLFormat(data, 5 , "student");
 }
 
-
 public static void importDadosEstudanteMEC(){
-   String data = exportarDadosEstudante();
-   ImportDataMEC imec = new ImportDataMEC();
-   imec.importData(data);
-}
+Adapter adapter = new Adapter();
+String data = adapter.exportarDadosEstudanteJSON();
 
+ImportDataMEC imec = new ImportDataMEC();
+imec.importData(data);
+}
 
 
 }
