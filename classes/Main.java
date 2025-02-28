@@ -514,4 +514,37 @@ public static void cadastrarTurma(){
   System.out.println("Turma cadastrada com sucesso!");
 }
 
+
+public static String exportarDadosEstudante(){
+  DataBase db = DataBase.getInstance();
+  ArrayList<String[]> data = new ArrayList<String[]>();
+ 
+  ExportData exp = new ExportData();
+  ArrayList<Aluno> alunos = db.getAlunos();
+  for(int i = 0; i < alunos.size(); i++){
+    String[] sm = {"matricula", "alunos.get(i).getMatricula()"};
+    String[] sn = {"nome", alunos.get(i).getNome()};
+    String[] sc ={"cpf", alunos.get(i).getCpf()};
+    String[] st = {"telefone", alunos.get(i).getTelefone()};
+    String[] se =  {"endereco",alunos.get(i).getEndereco()};
+    data.add(sm);
+    data.add(sn);
+    data.add(sc);
+    data.add(st);
+    data.add(se);
+
+
+  }
+  return exp.ArrayToXMLFormat(data, 5 , "student");
+}
+
+
+public static void importDadosEstudanteMEC(){
+   String data = exportarDadosEstudante();
+   ImportDataMEC imec = new ImportDataMEC();
+   imec.importData(data);
+}
+
+
+
 }
