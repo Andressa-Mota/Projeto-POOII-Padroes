@@ -24,7 +24,7 @@ public class Main {
       System.out.println("║                MENU                     ║");
       System.out.println("╠═════════════════════════════════════════╣");
       System.out.println("║  1 - Para Professor                     ║");
-      System.out.println("║  2 - Para Cordenador                    ║");   
+      System.out.println("║  2 - Para Coordenador                   ║");   
       System.out.println("║  3 - Para Exportar dados dos estudantes ║");  
       System.out.println("║  4 - Para Exportar dados para o MEC     ║");               
       System.out.println("║  0 - Sair                               ║");
@@ -35,37 +35,49 @@ public class Main {
       switch (opcao) {
         
         case 1:
-        System.out.println("Lista de professores:");
-        for (int i = 0; i < db.getProfessores().size(); i++) {
-            System.out.printf("%d - %s\n", i + 1, db.getProfessores().get(i).getNome());
-        }
-    
-        System.out.print("Escolha o professor: ");
-        int escolhaProfessor = entrada.nextInt();
-        
-        if (escolhaProfessor < 0 || escolhaProfessor > db.getProfessores().size()-1) {
-          System.out.println("Escolha inválida.");
-          return;
-      }
-        System.out.print("Digite sua senha: ");
-        String escolhaSenha = entrada.nextLine();
+          System.out.println("Lista de professores:");
+          for (int i = 0; i < db.getProfessores().size(); i++) {
+            System.out.printf("%d - %s\n", i, db.getProfessores().get(i).getNome());
+          }
 
-        if (escolhaSenha.equals(db.getProfessores().get(escolhaProfessor).getSenha())){
-              menuProfessor();
-        }
+          System.out.print("Escolha o professor: ");
+          int escolhaProfessor = entrada.nextInt();
+
+          if (escolhaProfessor < 0 || escolhaProfessor > db.getProfessores().size()) {
+            System.out.println("Escolha inválida.");
+            return;
+          }
+
+          System.out.print("Digite sua senha: ");
+          String escolhaSenha = entrada.next();
+
+          if (escolhaSenha.equals(db.getProfessores().get(escolhaProfessor).getSenha())) {
+            menuProfessor();
+          }
           break;
         case 2:
-        //System.out.print("De qual curso você é coordenador: ");
-        //mostrar lista de cursos
-        //escolher o curso
-        //pegar coordenador do curso esolhido e comparar com senhaescolhidacoord
-        //String escolhaSenhaCoord = entrada.nextLine();
-        //System.out.print("Digite sua senha: ");
-       //String escolhaSenhaCoord = entrada.nextLine();
+          System.out.println("Lista de cursos:");
 
-       // if (escolhaSenhaCoord.equals(db.getCursos().getgetSenha())){
-        //  menuCoordenador();
-        //}
+          for (int i = 0; i < db.getCursos().size(); i++) {
+            System.out.printf("%d - %s\n", i, db.getCursos().get(i).getNomeCurso());
+          }
+
+          System.out.print("Escolha o curso: ");
+          int escolhaCurso = entrada.nextInt();
+
+          if (escolhaCurso < 0 || escolhaCurso > db.getCursos().size()) {
+            System.out.println("Escolha inválida.");
+            return;
+          }
+
+          System.out.print("Digite sua senha: ");
+          String escolhaSenha2 = entrada.next();
+
+          if (escolhaSenha2.equals(db.getCursos().get(escolhaCurso).getCoordenador().getSenha())) {
+            menuCoordenador();
+          }
+
+        
           break;
 
         case 3: 
@@ -83,8 +95,6 @@ public class Main {
       } while (opcao != 0);
  
 
-    //menuProfessor();
-   
     entrada.close();
   }
 
@@ -101,7 +111,7 @@ public static void menuCoordenador(){
     System.out.println("║     6 - Cadastrar uma turma             ║");
     System.out.println("║     7 - Cadastrar um coordenador        ║");
     System.out.println("║  8 - Atribuir notas aos estudantes      ║");
-    System.out.println("║     9 - Mostrar a estatística          ║");
+    System.out.println("║     9 - Mostrar a estatística           ║");
     System.out.println("║      10 - Lista de recuperação          ║");
     System.out.println("║          11 - Lista geral               ║");
     System.out.println("║           12 - Histórico                ║");

@@ -32,6 +32,9 @@ public class DataBase {
         cursos.add(new Curso("Linguagem de programação", "3"));
         cursos.add(new Curso("Estrutura de dados", "5"));
 
+        cursos.getLast().vincularCoordenador(professores.get(0)); 
+        cursos.getFirst().vincularCoordenador(professores.get(1));
+        
         turmas.add(new Turma("20243", cursos.get(0),new Semestre("5", true)));
         turmas.add(new Turma("20247", cursos.get(1), new Semestre("6", true)));
 
