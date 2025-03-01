@@ -1,38 +1,40 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class Adapter {
-    
 
-    private ExportData exportData;
-
-    public Adapter() {
-        this.exportData = new ExportData();
-    }
+    public Adapter() {}
 
     public String exportarDadosEstudanteJSON() {
      
-        String xmlData = Main.exportarDadosEstudante();
-        
-       
-        String jsonData = convertXmlToJson(xmlData);
-        
-        return jsonData;
-    }
+        DataBase db = DataBase.getInstance();
+        ArrayList<Aluno> alunos = db.getAlunos();
 
-    private String convertXmlToJson(String xml) {
         
-        xml = xml.replace("<?xml version=\"1.0\"?>", "").trim();
-        
-       
-        xml = xml.replace("<data>", "{ \"data\": {");
-        xml = xml.replace("</data>", "} }");
-        xml = xml.replace("<student>", "{ \"student\": {");
-        xml = xml.replace("</student>", "} }");
+        StringBuilder json = new StringBuilder();
+        json.append("{ \"data\": {");
 
-       
-        xml = xml.replaceAll("<(\\w+)>(.*?)</\\1>", "\"$1\": \"$2\"");
+        for (int i = 0; i < alunos.size(); i++) {
+            Aluno aluno = alunos.get(i);
+            
+            
+            json.append("\"student" + (i + 1) + "\": {")
+                .append("\"matricula\": \"").append(aluno.getMatricula()).append("\", ")
+                .append("\"nome\": \"").append(aluno.getNome()).append("\", ")
+                .append("\"cpf\": \"").append(aluno.getCpf()).append("\", ")
+                .append("\"telefone\": \"").append(aluno.getTelefone()).append("\", ")
+                .append("\"endereco\": \"").append(aluno.getEndereco()).append("\"")
+                .append("}");
 
-        return xml;
+      
+            if (i < alunos.size() - 1) {
+                json.append(", ");
+            }
+        }
+
+        json.append("} }"); 
+
+        return json.toString();
     }
 }
-
