@@ -285,8 +285,16 @@ public static void cadastrarNotas(){
 
     System.out.printf("Média: %.2f\n", nota.calcularMedia());
     System.out.print("Situação: ");
-    db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).setNota(nota);
-    nota.verificarSituacao();
+    //db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).setNota(nota);
+    AlunoTurma alunoTurma = db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante);
+    if (nota.calcularMedia()< 2.5) {
+      alunoTurma.setEstado(new EstadoReprovado());
+    } else if (nota.calcularMedia() < 7) {
+      alunoTurma.setEstado(new EstadoRecuperacao());
+    } else {
+      alunoTurma.setEstado(new EstadoAtivo());
+    }
+    //nota.verificarSituacao();
 
 }
 

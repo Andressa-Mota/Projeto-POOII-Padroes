@@ -92,4 +92,10 @@ public String toString(){
 public  void update(Boolean param){
   bloqueado = !param;
 }
+
+
+public void adicionarNota(double nota) {
+  // TODO Auto-generated method stub
+  throw new UnsupportedOperationException("Unimplemented method 'adicionarNota'");
+}
 }
